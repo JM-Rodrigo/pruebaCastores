@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myApp">
+<head>
+  <meta charset="utf-8">
+  <title>Inicio de sesión</title>
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet">
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+  <link rel="stylesheet" href="app.css">
+  <script src="lib/html5-boilerplate/dist/js/vendor/modernizr-2.8.3.min.js"></script>
+  <script src="app.js"></script>
+</head>
+<body ng-controller="LogginCtrl">
+  <div class="grid-container">
+    <img src="img/grupocastores.png" alt="grupocastores" >
+  </div>
+    <div class="container mt-5">
+        <div class="row d-flex justify-content-center">
+            <div class="col-md-6">
+                <div class="card px-5 py-5" id="form1">
+                    <div class="form-data" v-if="!submitted">
+                        <div class="forms-inputs mb-4">
+                            <span>Usuario</span>
+                            <input type="text" ng-model="username">
+                        </div>
+                        <div class="forms-inputs mb-4">
+                            <span>Contraseña</span>
+                            <input type="password" ng-model="password">
+                        </div>
+                        <div class="mb-3">
+                            <button ng-click="login()" class="btn btn-dark w-100">Login</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+  </div>
+  <script src="lib/angular/angular.js"></script>
+  <script src="lib/angular-route/angular-route.js"></script>
+</body>
+</html>

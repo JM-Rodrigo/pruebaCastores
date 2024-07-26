@@ -1,0 +1,70 @@
+
+CREATE DATABASE Prueba;
+
+USE Prueba;
+
+
+CREATE TABLE productos (
+    idProducto INT(10) PRIMARY KEY AUTO_INCREMENT,
+    nombre VARCHAR(40) NOT NULL,
+    precio DECIMAL(16,2) NOT NULL
+);
+
+CREATE TABLE ventas (
+    idVentas INT(6) PRIMARY KEY AUTO_INCREMENT,
+    idProducto INT(6) NOT NULL,
+    cantidad INT(6) NOT NULL,
+    FOREIGN KEY (idProducto) REFERENCES productos(idProducto)
+);
+
+INSERT INTO productos(nombre, precio) VALUES("LAPTOP", 3000.00);
+INSERT INTO productos(nombre, precio) VALUES("PC", 4000.00);
+INSERT INTO productos(nombre, precio) VALUES("MOUSE", 100.00);
+INSERT INTO productos(nombre, precio) VALUES("TECLADO", 150.00);
+INSERT INTO productos(nombre, precio) VALUES("MONITOR", 2000.00);
+INSERT INTO productos(nombre, precio) VALUES("MICROFONO", 350.00);
+INSERT INTO productos(nombre, precio) VALUES("AUDIFONOS", 450.00);
+
+INSERT INTO ventas(idProducto, cantidad) VALUES(5, 8);
+INSERT INTO ventas(idProducto, cantidad) VALUES(1, 15);
+INSERT INTO ventas(idProducto, cantidad) VALUES(6, 13);
+INSERT INTO ventas(idProducto, cantidad) VALUES(6, 4);
+INSERT INTO ventas(idProducto, cantidad) VALUES(2, 3);
+INSERT INTO ventas(idProducto, cantidad) VALUES(5, 1);
+INSERT INTO ventas(idProducto, cantidad) VALUES(4, 5);
+INSERT INTO ventas(idProducto, cantidad) VALUES(2, 5);
+INSERT INTO ventas(idProducto, cantidad) VALUES(6, 2);
+INSERT INTO ventas(idProducto, cantidad) VALUES(1, 8);
+
+
+SELECT
+	p.nombre
+FROM
+	productos AS p
+LEFT JOIN ventas AS v ON
+	p.idProducto = v.idProducto
+WHERE
+	v.cantidad = 1;
+
+SELECT
+	p.nombre,
+	SUM(v.cantidad) AS cantidad
+FROM
+	productos AS p
+LEFT JOIN ventas AS v ON
+	p.idProducto = v.idProducto
+WHERE
+	v.cantidad IS NOT NULL
+GROUP BY (p.nombre)
+ORDER BY SUM(v.cantidad) ASC;
+
+
+SELECT
+	p.nombre AS NombreProducto,
+	SUM(v.cantidad * p.precio) AS Total
+FROM
+	productos AS p
+LEFT JOIN ventas  AS v ON
+	p.idProducto = v.idProducto
+GROUP BY (nombre)
+ORDER BY SUM(v.cantidad) ASC;
